@@ -197,7 +197,7 @@ function OrientationForm() {
               <option value="Game Development">Game Development</option>
               <option value="GATE Exam">GATE Exam</option>
               <option value="Hardware/Robotics/Embedded Design">Hardware/Robotics/Embedded Design</option>
-              <option value="Web 3.0/Blockchain">Web 3.0/Blockchain</option>
+              <option value="DevOps/Cloud Development">DevOps/Cloud Development</option>
               <option value="Website Development">Website Development</option>
             </select>
           </div>
