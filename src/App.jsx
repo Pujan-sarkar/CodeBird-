@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import logo from './assets/logo.png';
-import Modal from './Modal'; // Import the Modal component (if you use a separate file)
+import React, { useState } from "react";
+import axios from "axios";
+import logo from "./assets/logo.png";
+import Modal from "./Modal"; // Import the Modal component (if you use a separate file)
 
 function OrientationForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    rollNo: '',
-    department: '',
-    phone: '',
-    email: '',
-    domain: '',
-    expectation: '',
-    query: '',
+    name: "",
+    rollNo: "",
+    department: "",
+    phone: "",
+    email: "",
+    domain: "",
+    expectation: "",
+    query: "",
   });
 
   const [submittedData, setSubmittedData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
   const handleChange = (e) => {
@@ -35,27 +35,32 @@ function OrientationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
-    setSuccessMessage('');
+    setError("");
+    setSuccessMessage("");
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/forms/post`, formData);
+      const response = await axios.post(
+        `https://code-bird-form-backend.vercel.app/api/forms/post`,
+        formData
+      );
       setSubmittedData(response.data.data); // Store the response data
-      setSuccessMessage('Form submitted successfully!');
+      setSuccessMessage("Form submitted successfully!");
       setFormData({
-        name: '',
-        rollNo: '',
-        department: '',
-        phone: '',
-        email: '',
-        domain: '',
-        expectation: '',
-        query: '',
+        name: "",
+        rollNo: "",
+        department: "",
+        phone: "",
+        email: "",
+        domain: "",
+        expectation: "",
+        query: "",
       });
       setIsModalOpen(true); // Show the modal on success
     } catch (error) {
-      console.error('Error submitting form data:', error);
-      setError(error.response?.data?.message || 'An error occurred. Please try again.');
+      console.error("Error submitting form data:", error);
+      setError(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -91,11 +96,11 @@ function OrientationForm() {
         </div>
         <div>
           <span className="font-semibold">Expectation:</span>
-          <p className="mt-1">{submittedData.expectation || 'N/A'}</p>
+          <p className="mt-1">{submittedData.expectation || "N/A"}</p>
         </div>
         <div>
           <span className="font-semibold">Query:</span>
-          <p className="mt-1">{submittedData.query || 'N/A'}</p>
+          <p className="mt-1">{submittedData.query || "N/A"}</p>
         </div>
       </div>
     );
@@ -103,13 +108,25 @@ function OrientationForm() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen lg:bg-gray-50">
-      <img src={logo} alt="CodeBird Logo" className="w-[7rem] h-[7rem] mt-5 mb-4" />
+      <img
+        src={logo}
+        alt="CodeBird Logo"
+        className="w-[7rem] h-[7rem] mt-5 mb-4"
+      />
       <div className="max-w-lg w-full p-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">CodeBird's Freshers' Orientation Programme Registration</h2>
-        
-        {loading && <div className="mb-4 text-blue-500">Submitting your form, please wait...</div>}
+        <h2 className="text-2xl font-bold text-center mb-6">
+          CodeBird's Freshers' Orientation Programme Registration
+        </h2>
+
+        {loading && (
+          <div className="mb-4 text-blue-500">
+            Submitting your form, please wait...
+          </div>
+        )}
         {error && <div className="mb-4 text-red-500">{error}</div>}
-        {successMessage && <div className="mb-4 text-green-500">{successMessage}</div>}
+        {successMessage && (
+          <div className="mb-4 text-green-500">{successMessage}</div>
+        )}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -137,7 +154,9 @@ function OrientationForm() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Department *</label>
+            <label className="block text-gray-700 font-medium">
+              Department *
+            </label>
             <select
               name="department"
               value={formData.department}
@@ -147,6 +166,7 @@ function OrientationForm() {
             >
               <option value="">Select Department</option>
               <option value="CSE">CSE</option>
+              <option value="IT">IT</option>
               <option value="ECE">ECE</option>
               <option value="CE">CE</option>
               <option value="EE">EE</option>
@@ -155,7 +175,9 @@ function OrientationForm() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Phone Number (WhatsApp) *</label>
+            <label className="block text-gray-700 font-medium">
+              Phone Number (WhatsApp) *
+            </label>
             <input
               type="tel"
               name="phone"
@@ -181,7 +203,9 @@ function OrientationForm() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Domain Of Interest *</label>
+            <label className="block text-gray-700 font-medium">
+              Domain Of Interest *
+            </label>
             <select
               name="domain"
               value={formData.domain}
@@ -196,14 +220,20 @@ function OrientationForm() {
               <option value="Cyber Security">Cyber Security</option>
               <option value="Game Development">Game Development</option>
               <option value="GATE Exam">GATE Exam</option>
-              <option value="Hardware/Robotics/Embedded Design">Hardware/Robotics/Embedded Design</option>
-              <option value="DevOps/Cloud Development">DevOps/Cloud Development</option>
+              <option value="Hardware/Robotics/Embedded Design">
+                Hardware/Robotics/Embedded Design
+              </option>
+              <option value="DevOps/Cloud Development">
+                DevOps/Cloud Development
+              </option>
               <option value="Website Development">Website Development</option>
             </select>
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">What are you looking forward to from this programme?</label>
+            <label className="block text-gray-700 font-medium">
+              What are you looking forward to from this programme?
+            </label>
             <textarea
               name="expectation"
               value={formData.expectation}
@@ -213,7 +243,9 @@ function OrientationForm() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Any Query (Feel free to ask)?</label>
+            <label className="block text-gray-700 font-medium">
+              Any Query (Feel free to ask)?
+            </label>
             <textarea
               name="query"
               value={formData.query}
@@ -226,7 +258,7 @@ function OrientationForm() {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            {loading ? 'Submitting...' : 'Submit'}
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>
