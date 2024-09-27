@@ -55,13 +55,13 @@ export default function InvitationCard() {
           </div>
 
           <div className="text-center mb-4">
-            <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded block mb-2">
+            <span className="bg-gray-200 text-gray-800 px-5 py-5 rounded block mb-2">
               Name: {name}
             </span>
-            <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded block mb-2">
+            <span className="bg-gray-200 text-gray-800 px-5 py-5 rounded block mb-2">
               Roll: {rollNo}
             </span>
-            <span className="bg-gray-200 text-gray-800 px-3 py-1 rounded block mb-2">
+            <span className="bg-gray-200 text-gray-800 px-5 py-5 rounded block mb-2">
               Department: {department}
             </span>
           </div>
@@ -74,9 +74,9 @@ export default function InvitationCard() {
           </div>
 
           <div className="text-center mb-4">
-            <p className="font-semibold">Date: September 15, 2023</p>
-            <p className="font-semibold">Time: 2:00 PM - 5:00 PM</p>
-            <p className="font-semibold">Venue: Main Auditorium</p>
+            <p className="font-semibold">Date: Notify soon </p>
+            <p className="font-semibold">Time: Notify soon </p>
+            <p className="font-semibold">Venue: Room no 506/507 </p>
           </div>
         </div>
       </div>

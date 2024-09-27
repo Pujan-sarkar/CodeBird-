@@ -184,7 +184,6 @@ function Form() {
             >
               <option value="">Select Department</option>
               <option value="CSE">CSE</option>
-              <option value="IT">IT</option>
               <option value="ECE">ECE</option>
               <option value="CE">CE</option>
               <option value="EE">EE</option>
