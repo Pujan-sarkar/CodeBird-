@@ -28,7 +28,7 @@ const QRScanner = () => {
 
     try {
       // Make POST request to verify the QR code
-      const response = await axios.post('http://localhost:5000/api/attend/mark', {
+      const response = await axios.post(`https://code-bird-form-backend.vercel.app/api/attend/mark`, {
         rollNo,
         department,
       });
