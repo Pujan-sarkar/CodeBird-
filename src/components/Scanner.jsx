@@ -1,52 +1,63 @@
-import React, { useState, useEffect, useRef } from 'react';
-import QRCode from 'qrcode';
+import React, { useState } from 'react';
+import { Scanner } from '@yudiel/react-qr-scanner';
 
-const QRCodeGenerator = () => {
-  const [text, setText] = useState(''); // Store user input for QR code generation
-  const [error, setError] = useState(null); // Store any errors
-  const canvasRef = useRef(null); // Reference for the canvas element
+const QRScanner = () => {
+  const [scanResult, setScanResult] = useState(null); // Store scan result
+  const [error, setError] = useState(null); // Store error message
+  const [isVerified, setIsVerified] = useState(false); // State to track verification status
 
-  // Generate QR code when the text changes or when "Generate" button is clicked
-  const generateQRCode = async () => {
-    try {
-      if (text.trim() === '') {
-        setError('Please enter some text to generate a QR code.');
-        return;
-      }
+  const handleScan = (detectedCodes) => {
+    if (detectedCodes.length > 0) {
+      setScanResult(detectedCodes[0].rawValue); // Save the first detected QR code
+      setIsVerified(false); // Reset verification status
       setError(null); // Clear any previous errors
-      // Generate the QR code in the canvas
-      await QRCode.toCanvas(canvasRef.current, text, { errorCorrectionLevel: 'H' });
-    } catch (err) {
-      console.error(err);
-      setError('Error generating QR code. Please try again.');
     }
+  };
+
+  const handleError = (err) => {
+    console.error(err);
+    setError('Error scanning the QR code. Please try again.');
+  };
+
+  const handleVerify = () => {
+    console.log("Verified Scan Result:", scanResult);
+    setIsVerified(true); // Mark as verified
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center flex-col justify-center p-4">
-      <h1 className="text-3xl font-bold text-indigo-700 mb-4">QR Code Generator</h1>
+      <h1 className="text-3xl font-bold text-indigo-700 mb-4">QR Code Scanner</h1>
       
-      {/* Input to get text for QR code */}
+      {/* QR Code Scanner */}
       <div className="bg-white p-4 shadow-lg rounded-md w-full max-w-md">
-        <input
-          type="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md mb-2"
-          placeholder="Enter text to generate QR code"
+        <Scanner
+          onScan={handleScan} // Callback when a QR code is scanned
+          onError={handleError} // Callback for errors
+          constraints={{ facingMode: "environment" }} // Use back camera if available
         />
-        <button
-          onClick={generateQRCode}
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
-        >
-          Generate QR Code
-        </button>
       </div>
 
-      {/* Canvas where QR code will be rendered */}
-      <div className="mt-4">
-        <canvas ref={canvasRef} className="border border-gray-300"></canvas>
-      </div>
+      {/* Display scan result */}
+      {scanResult && !isVerified && (
+        <div className="mt-4 p-4 bg-blue-100 text-blue-700 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold">Scan Result:</h2>
+          <p>{scanResult}</p>
+          <button 
+            onClick={handleVerify}
+            className="mt-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            Verify
+          </button>
+        </div>
+      )}
+
+      {/* Display verification message */}
+      {isVerified && (
+        <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold">Verified Successfully!</h2>
+          <p>Your scan result has been verified and logged in the console.</p>
+        </div>
+      )}
 
       {/* Display error message if any */}
       {error && (
@@ -59,4 +70,4 @@ const QRCodeGenerator = () => {
   );
 };
 
-export default QRCodeGenerator;
+export default QRScanner;
