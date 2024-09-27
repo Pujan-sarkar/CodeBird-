@@ -3,6 +3,7 @@ import Form from "./components/Form";
 import Dashboard from "./components/Dashboard";
 // import InvitationCard from "./components/Invition";
 import InviteCard from "./components/InviteCard";
+import QRScanner from "./components/Scanner";
 function App() {
   
   return (
@@ -18,6 +19,7 @@ function App() {
             element={ <Dashboard/>}
           />
            <Route path="/:name/:department/:rollNo" element={<InviteCard/>} />
+           <Route path="/scan" element={<QRScanner/>} />
 
           
         </Routes>
