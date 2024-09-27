@@ -73,7 +73,7 @@ const InviteCard = () => {
 
       {/* First Page - Invitation Card */}
       <div ref={refCard} className="relative w-auto">
-        <h1 className="absolute text-sm sm:text-2xl text-white pacifico-regular top-[13rem] sm:top-[12rem] left-[5.5rem] sm:left-[7rem] lg:top-[14rem] lg:left-[9rem]">
+        <h1 className="absolute text-sm sm:text-2xl text-white pacifico-regular top-[13rem] sm:top-[12rem] left-[6.5rem] lg:top-[14rem] lg:left-[9rem]">
           {name}
         </h1>
 
