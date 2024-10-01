@@ -36,6 +36,8 @@ function Form() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    e.preventDefault();
     setLoading(true);
     setError("");
     setSuccessMessage("");
@@ -71,7 +73,7 @@ function Form() {
   // Function to format the submitted data in a nice layout
   const renderSubmittedData = () => {
     return (
-      <div className="space-y-4">
+      <div className="space-y-3">
         {/* Rendering submitted data */}
         <div className="flex justify-between">
           <span className="font-semibold">Name:</span>
@@ -97,11 +99,11 @@ function Form() {
           <span className="font-semibold">Domain:</span>
           <span>{submittedData.domain}</span>
         </div>
-        <div>
+        <div className="flex justify-between">
           <span className="font-semibold">Expectation:</span>
           <p className="mt-1">{submittedData.expectation || "N/A"}</p>
         </div>
-        <div>
+        <div className="flex justify-between" >
           <span className="font-semibold">Query:</span>
           <p className="mt-1">{submittedData.query || "N/A"}</p>
         </div>
@@ -134,10 +136,12 @@ function Form() {
         className="w-[7rem] h-[7rem] mt-5 mb-0 lg:mb-4"
       />
       <div className="max-w-lg w-full p-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          CodeBird's Freshers' Orientation Programme Registration
-        </h2>
-
+        <div className="flex justify-center items-center flex-col">
+          <h2 className="text-2xl font-bold text-center mb-6">
+            Fly Hight With The CodeBird
+          </h2>
+          <p className="text-xl text-center">Join Our Community where innovation takes flight!</p>
+        </div>
         {loading && (
           <div className="mb-4 text-blue-500">
             Submitting your form, please wait...
@@ -218,7 +222,7 @@ function Form() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">Domain Of Interest *</label>
+            <label className="block text-gray-700 font-medium">Primary Domain *</label>
             <select
               name="domain"
               value={formData.domain}
@@ -242,18 +246,42 @@ function Form() {
               <option value="Website Development">Website Development</option>
             </select>
           </div>
-
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium">
-              What are you looking forward to from this programme?
-            </label>
-            <textarea
+            <label className="block text-gray-700 font-medium">Secondary Domain (If Any)</label>
+            <select
               name="expectation"
               value={formData.expectation}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-            />
+              required
+            >
+              <option value="">Select Domain</option>
+              <option value="AI/ML/DS">AI/ML/DS</option>
+              <option value="App Development">App Development</option>
+              <option value="CP/DSA">CP/DSA</option>
+              <option value="Cyber Security">Cyber Security</option>
+              <option value="Game Development">Game Development</option>
+              <option value="GATE Exam">GATE Exam</option>
+              <option value="Hardware/Robotics/Embedded Design">
+                Hardware/Robotics/Embedded Design
+              </option>
+              <option value="DevOps/Cloud Development">
+                DevOps/Cloud Development
+              </option>
+              <option value="Website Development">Website Development</option>
+            </select>
           </div>
+          {/* <div className="mb-4">
+            <label className="block text-gray-700 font-medium">
+              If you Interested in Any Other Domains?
+            </label>
+            <textarea
+              name="(e.g - Web Development)"
+              value={formData.expectation}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            />
+          </div> */}
 
           <div className="mb-4">
             <label className="block text-gray-700 font-medium">
@@ -268,7 +296,7 @@ function Form() {
           </div>
 
           <button
-            disabled
+          
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
@@ -279,14 +307,15 @@ function Form() {
 
       {/* Modal to show submitted data */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl text-green-500 font-semibold pb-10">Submitted Successfully!</h2>
+        <h2 className="text-2xl font-bold text-green-400 text-center pb-10">Welcome To The Codebird!</h2>
         {submittedData && renderSubmittedData()}
         {submittedData ? (
           <Link
-            to={`/${encodeURIComponent(submittedData.name)}/${submittedData.department}/${submittedData.rollNo}`}
-            className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            to={`https://discord.gg/nBkArFNT`}
+            className="mt-8 bg-blue-500 text-white flex justify-center py-2 px-4 rounded-md hover:bg-blue-600"
           >
-            Download Invitation
+            
+           Join Discord
           </Link>
         ) : (
           <div className="mt-4 text-gray-500">Generating invitation...</div>

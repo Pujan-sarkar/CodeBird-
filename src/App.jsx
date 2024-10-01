@@ -18,8 +18,8 @@ function App() {
             path="/get/data"
             element={ <Dashboard/>}
           />
-           <Route path="/:name/:department/:rollNo" element={<InviteCard/>} />
-           <Route path="/scan" element={<QRScanner/>} />
+           {/* <Route path="/:name/:department/:rollNo" element={<InviteCard/>} />
+           <Route path="/scan" element={<QRScanner/>} /> */}
 
           
         </Routes>
